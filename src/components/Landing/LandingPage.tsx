@@ -1,6 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Menu, X, MapPin, Phone, Mail, Clock, Scissors, Sparkles, User } from 'lucide-react';
+import {
+  Menu,
+  X,
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  Scissors,
+  Sparkles,
+  User,
+  ArrowLeft,
+  ArrowRight,
+} from 'lucide-react';
 import { AuthModal } from '../Auth/AuthModal';
 import { GoogleMap } from '../Maps/GoogleMap';
 import { useAuth } from '../../contexts/AuthContext';
@@ -59,6 +71,8 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
   const [authModalView, setAuthModalView] = useState<'login' | 'register'>('login');
   const [bookingFormOpen, setBookingFormOpen] = useState(false);
   const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const { isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
 
@@ -76,10 +90,11 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentServiceIndex((prev) => (prev + 1) % services.length);
-    }, 3000);
-    return () => clearInterval(interval);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -121,6 +136,18 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
     setAuthModalOpen(true);
   };
 
+  const visibleSlides = isMobile ? 1 : 3;
+  const slideWidth = 100 / visibleSlides;
+  const maxIndex = Math.max(0, services.length - visibleSlides);
+
+  const nextService = () => {
+    setCurrentServiceIndex((prev) => (prev < maxIndex ? prev + 1 : prev));
+  };
+
+  const prevService = () => {
+    setCurrentServiceIndex((prev) => (prev > 0 ? prev - 1 : prev));
+  };
+
   return (
     <div className="min-h-screen bg-[#1A1A1A] text-white">
       {/* Header/Navigation */}
@@ -154,7 +181,7 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
               onClick={handleBookingClick}
               className="bg-[#C4A747] text-black px-4 py-2 rounded hover:bg-[#D4B757] transition-colors uppercase tracking-wide text-sm font-bold"
             >
-              Agendar
+              Agendar Demonstrativo
             </button>
             {isAuthenticated ? (
               <button
@@ -205,7 +232,7 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
                 onClick={handleBookingClick}
                 className="bg-[#C4A747] text-black px-4 py-3 rounded hover:bg-[#D4B757] transition-colors uppercase tracking-wide text-sm font-bold"
               >
-                Agendar
+                Agendar Demonstrativo
               </button>
             </div>
           </div>
@@ -230,7 +257,7 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
             onClick={handleBookingClick}
             className="bg-[#C4A747] text-black px-8 py-4 rounded text-lg font-bold hover:bg-[#D4B757] transition-colors uppercase tracking-wide"
           >
-            Agende seu horário
+            Agende um demonstrativo
           </button>
         </div>
       </section>
@@ -243,13 +270,33 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
             <div className="w-24 h-1 bg-[#C4A747] mx-auto"></div>
           </div>
           
-          <div className="md:hidden overflow-hidden relative">
+          <div className="relative overflow-hidden">
             <div
               className="flex transition-transform duration-500"
-              style={{ transform: `translateX(-${currentServiceIndex * 100}%)` }}
+              style={{ transform: `translateX(-${currentServiceIndex * slideWidth}%)` }}
+              onTouchStart={(e) => setTouchStartX(e.touches[0].clientX)}
+              onTouchEnd={(e) => {
+                if (touchStartX !== null) {
+                  const diff = e.changedTouches[0].clientX - touchStartX;
+                  if (diff > 50) prevService();
+                  if (diff < -50) nextService();
+                }
+              }}
+              onMouseDown={(e) => setTouchStartX(e.clientX)}
+              onMouseUp={(e) => {
+                if (touchStartX !== null) {
+                  const diff = e.clientX - touchStartX;
+                  if (diff > 50) prevService();
+                  if (diff < -50) nextService();
+                }
+              }}
             >
               {services.map((service, index) => (
-                <div key={index} className="min-w-full p-4" onClick={handleBookingClick}>
+                <div
+                  key={index}
+                  className="min-w-full md:min-w-[33.333%] p-4"
+                  onClick={handleBookingClick}
+                >
                   <div className="bg-[#222222] p-8 rounded-lg transition-transform duration-300 hover:-translate-y-2 border border-[#333333] hover:border-[#C4A747] cursor-pointer group">
                     <div className="w-16 h-16 bg-[#333333] rounded-full flex items-center justify-center mb-6 mx-auto group-hover:bg-[#C4A747] transition-colors">
                       <service.icon className="w-8 h-8 text-white" />
@@ -261,22 +308,18 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
                 </div>
               ))}
             </div>
-          </div>
-
-          <div className="hidden md:grid grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <div
-                key={index}
-                className="bg-[#222222] p-8 rounded-lg transition-transform duration-300 hover:-translate-y-2 border border-[#333333] hover:border-[#C4A747] group"
-              >
-                <div className="w-16 h-16 bg-[#333333] rounded-full flex items-center justify-center mb-6 mx-auto group-hover:bg-[#C4A747] transition-colors">
-                  <service.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold mb-4 text-center">{service.title}</h3>
-                <p className="text-gray-400 mb-6 text-center">{service.description}</p>
-                <p className="text-[#C4A747] font-bold text-center text-xl">{service.price}</p>
-              </div>
-            ))}
+            <button
+              onClick={prevService}
+              className="hidden md:flex items-center justify-center absolute left-2 top-1/2 -translate-y-1/2 bg-[#C4A747] text-black p-2 rounded-full"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={nextService}
+              className="hidden md:flex items-center justify-center absolute right-2 top-1/2 -translate-y-1/2 bg-[#C4A747] text-black p-2 rounded-full"
+            >
+              <ArrowRight className="w-5 h-5" />
+            </button>
           </div>
           
           <div className="text-center mt-12">
@@ -413,7 +456,7 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
             <h2 className="text-3xl md:text-4xl font-bold mb-4">PRONTO PARA TRANSFORMAR SEU VISUAL?</h2>
             <div className="w-24 h-1 bg-[#C4A747] mx-auto mb-6"></div>
             <p className="text-xl text-gray-300 mb-8">
-              Agende seu horário agora e experimente o melhor serviço de barbearia da cidade.
+              Agende um demonstrativo agora e experimente o melhor serviço de barbearia da cidade.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <button
@@ -421,7 +464,7 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
                 className="bg-[#C4A747] text-black px-8 py-4 rounded hover:bg-[#D4B757] transition-colors text-center"
               >
                 <span className="block text-lg font-bold uppercase tracking-wide">
-                  Agendar seu horário
+                  Agendar Demonstrativo
                 </span>
                 <span className="block text-xs sm:text-sm italic">
                   Teste nosso demo e agende online de qualquer dispositivo (mobile e desktop)
@@ -446,7 +489,7 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
         <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
           <div className="bg-[#222222] rounded-lg p-6 max-w-md w-full border border-[#333333]">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-bold">Agendar Horário</h3>
+              <h3 className="text-xl font-bold">Agendar Demonstrativo</h3>
               <button onClick={() => setBookingFormOpen(false)} className="text-gray-400 hover:text-white">
                 <X className="w-6 h-6" />
               </button>
@@ -480,55 +523,12 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
                 />
               </div>
               
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">Serviço</label>
-                <select className="w-full px-4 py-2 bg-[#333333] border border-[#444444] rounded focus:outline-none focus:ring-2 focus:ring-[#C4A747] text-white">
-                  <option value="">Selecione um serviço</option>
-                  <option value="corte">Corte de Cabelo</option>
-                  <option value="barba">Barba</option>
-                  <option value="combo">Corte + Barba</option>
-                  <option value="outros">Outros serviços</option>
-                </select>
-              </div>
               
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">Data</label>
-                  <input 
-                    type="date" 
-                    className="w-full px-4 py-2 bg-[#333333] border border-[#444444] rounded focus:outline-none focus:ring-2 focus:ring-[#C4A747] text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">Horário</label>
-                  <select className="w-full px-4 py-2 bg-[#333333] border border-[#444444] rounded focus:outline-none focus:ring-2 focus:ring-[#C4A747] text-white">
-                    <option value="">Selecione</option>
-                    <option value="09:00">09:00</option>
-                    <option value="10:00">10:00</option>
-                    <option value="11:00">11:00</option>
-                    <option value="14:00">14:00</option>
-                    <option value="15:00">15:00</option>
-                    <option value="16:00">16:00</option>
-                    <option value="17:00">17:00</option>
-                    <option value="18:00">18:00</option>
-                  </select>
-                </div>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">Observações (opcional)</label>
-                <textarea 
-                  className="w-full px-4 py-2 bg-[#333333] border border-[#444444] rounded focus:outline-none focus:ring-2 focus:ring-[#C4A747] text-white"
-                  rows={3}
-                  placeholder="Alguma informação adicional?"
-                ></textarea>
-              </div>
-              
-              <button 
+              <button
                 type="submit"
                 className="w-full bg-[#C4A747] text-black py-3 rounded font-bold hover:bg-[#D4B757] transition-colors"
               >
-                Confirmar Agendamento
+                Confirmar Demonstração
               </button>
             </form>
           </div>
