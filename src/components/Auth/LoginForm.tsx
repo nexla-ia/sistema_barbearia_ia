@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Mail, Lock, User, AlertCircle } from 'lucide-react';
+import { Mail, Lock, AlertCircle } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
-interface LoginFormProps {
-  onToggleForm: () => void;
-}
-
-export function LoginForm({ onToggleForm }: LoginFormProps) {
+export function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
@@ -27,7 +23,13 @@ export function LoginForm({ onToggleForm }: LoginFormProps) {
     
     try {
       await login(email, password);
-      navigate('/admin');
+      const role =
+        email === 'admin@example.com'
+          ? 'admin'
+          : email === 'employee@example.com'
+            ? 'employee'
+            : 'client';
+      navigate(role === 'admin' ? '/admin' : role === 'employee' ? '/employee' : '/client');
     } catch (err) {
       setFormError((err as Error).message);
     }
@@ -103,17 +105,6 @@ export function LoginForm({ onToggleForm }: LoginFormProps) {
         >
           {isLoading ? 'Entrando...' : 'Entrar'}
         </button>
-        
-        <p className="text-center text-sm text-gray-600">
-          Não tem uma conta?{' '}
-          <button
-            type="button"
-            onClick={onToggleForm}
-            className="text-amber-600 hover:text-amber-500 font-medium"
-          >
-            Cadastre-se
-          </button>
-        </p>
         
         <div className="mt-4 pt-4 border-t border-gray-200">
           <p className="text-center text-sm text-gray-500 mb-2">Acesso rápido para demonstração:</p>
