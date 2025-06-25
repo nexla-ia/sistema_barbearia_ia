@@ -3,10 +3,10 @@ import { Mail, Lock, User, AlertCircle } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
 interface RegisterFormProps {
-  onToggleForm: () => void;
+  onSuccess?: () => void;
 }
 
-export function RegisterForm({ onToggleForm }: RegisterFormProps) {
+export function RegisterForm({ onSuccess }: RegisterFormProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -31,8 +31,7 @@ export function RegisterForm({ onToggleForm }: RegisterFormProps) {
     
     try {
       await register(name, email, password);
-      // Registration successful, show login form
-      onToggleForm();
+      onSuccess?.();
     } catch (err) {
       setFormError((err as Error).message);
     }
@@ -130,16 +129,6 @@ export function RegisterForm({ onToggleForm }: RegisterFormProps) {
           {isLoading ? 'Cadastrando...' : 'Cadastrar'}
         </button>
         
-        <p className="text-center text-sm text-gray-600">
-          Já tem uma conta?{' '}
-          <button
-            type="button"
-            onClick={onToggleForm}
-            className="text-amber-600 hover:text-amber-500 font-medium"
-          >
-            Faça login
-          </button>
-        </p>
       </form>
     </div>
   );

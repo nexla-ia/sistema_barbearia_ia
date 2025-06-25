@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Menu, X, MapPin, Phone, Mail, Instagram, Facebook, Twitter, Clock, Scissors, Sparkles, User, Lock } from 'lucide-react';
+import { Menu, X, MapPin, Phone, Mail, Instagram, Facebook, Twitter, Clock, Scissors, Sparkles } from 'lucide-react';
 import { AuthModal } from '../Auth/AuthModal';
 import { GoogleMap } from '../Maps/GoogleMap';
 import { useAuth } from '../../contexts/AuthContext';
@@ -39,9 +39,16 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
     setBookingFormOpen(true);
   };
 
+  const handleCTA = () => {
+    if (isAuthenticated) {
+      navigate('/client');
+    } else {
+      openAuthModal('register');
+    }
+  };
+
   const handleLoginClick = () => {
     if (isAuthenticated) {
-      // Redirect based on user role
       if (user?.role === 'admin') {
         navigate('/admin');
       } else if (user?.role === 'employee') {
@@ -50,13 +57,12 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
         navigate('/client');
       }
     } else {
-      setAuthModalView('login');
-      setAuthModalOpen(true);
+      openAuthModal('login');
     }
   };
 
-  const handleRegisterClick = () => {
-    setAuthModalView('register');
+  const openAuthModal = (view: 'login' | 'register') => {
+    setAuthModalView(view);
     setAuthModalOpen(true);
   };
 
@@ -99,20 +105,12 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
                 Minha Conta
               </button>
             ) : (
-              <>
-                <button
-                  onClick={handleLoginClick}
-                  className="border border-white text-white px-4 py-2 rounded hover:bg-white hover:text-black transition-colors uppercase tracking-wide text-sm font-bold"
-                >
-                  Login
-                </button>
-                <button
-                  onClick={handleRegisterClick}
-                  className="border border-white text-white px-4 py-2 rounded hover:bg-white hover:text-black transition-colors uppercase tracking-wide text-sm font-bold"
-                >
-                  Cadastro
-                </button>
-              </>
+              <button
+                onClick={() => openAuthModal('login')}
+                className="border border-white text-white px-4 py-2 rounded hover:bg-white hover:text-black transition-colors uppercase tracking-wide text-sm font-bold"
+              >
+                Login / Cadastro
+              </button>
             )}
           </nav>
           
@@ -154,16 +152,10 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
               ) : (
                 <>
                   <button
-                    onClick={handleLoginClick}
+                    onClick={() => openAuthModal('login')}
                     className="border border-white text-white px-4 py-3 rounded hover:bg-white hover:text-black transition-colors uppercase tracking-wide text-sm font-bold"
                   >
-                    Login
-                  </button>
-                  <button
-                    onClick={handleRegisterClick}
-                    className="border border-white text-white px-4 py-3 rounded hover:bg-white hover:text-black transition-colors uppercase tracking-wide text-sm font-bold"
-                  >
-                    Cadastro
+                    Login / Cadastro
                   </button>
                 </>
               )}
@@ -240,7 +232,10 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
           </div>
           
           <div className="text-center mt-12">
-            <button className="border-2 border-[#C4A747] text-[#C4A747] px-8 py-3 rounded text-lg font-bold hover:bg-[#C4A747] hover:text-black transition-colors uppercase tracking-wide">
+            <button
+              onClick={handleCTA}
+              className="border-2 border-[#C4A747] text-[#C4A747] px-8 py-3 rounded text-lg font-bold hover:bg-[#C4A747] hover:text-black transition-colors uppercase tracking-wide"
+            >
               Ver todos os serviços
             </button>
           </div>
@@ -273,7 +268,10 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
                   </div>
                 ))}
               </div>
-              <button className="bg-[#C4A747] text-black px-6 py-3 rounded font-bold hover:bg-[#D4B757] transition-colors uppercase tracking-wide text-sm">
+              <button
+                onClick={handleCTA}
+                className="bg-[#C4A747] text-black px-6 py-3 rounded font-bold hover:bg-[#D4B757] transition-colors uppercase tracking-wide text-sm"
+              >
                 Conheça nossa história
               </button>
             </div>
@@ -355,13 +353,7 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
                   <p className="ml-3 font-medium">contato@barberpro.com.br</p>
                 </div>
               </div>
-              <div className="h-64 rounded-lg overflow-hidden bg-[#222222] border border-[#333333] flex items-center justify-center">
-                <div className="text-center p-4">
-                  <MapPin className="w-8 h-8 text-[#C4A747] mx-auto mb-2" />
-                  <p className="text-gray-300">Av. Paulista, 1000, Bela Vista</p>
-                  <p className="text-gray-400 text-sm">São Paulo - SP</p>
-                </div>
-              </div>
+              <GoogleMap address="Av. Paulista, 1000, São Paulo - SP" height="256px" />
             </div>
           </div>
         </div>
@@ -388,9 +380,14 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
               >
                 Agendar online
               </button>
-              <button className="border-2 border-white text-white px-8 py-4 rounded text-lg font-bold hover:bg-white hover:text-black transition-colors uppercase tracking-wide">
+              <a
+                href="https://wa.me/556999300101"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border-2 border-white text-white px-8 py-4 rounded text-lg font-bold hover:bg-white hover:text-black transition-colors uppercase tracking-wide text-center"
+              >
                 Contato via WhatsApp
-              </button>
+              </a>
             </div>
           </div>
         </div>

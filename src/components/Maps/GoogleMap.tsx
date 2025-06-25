@@ -6,17 +6,18 @@ interface GoogleMapProps {
   height?: string;
 }
 
-export function GoogleMap({ address, height = '400px' }: GoogleMapProps) {
+export function GoogleMap({ address, zoom = 15, height = '400px' }: GoogleMapProps) {
+  const encoded = encodeURIComponent(address);
+  const src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyA6AaE8UvYVVif1Pm2b64sf7dN13EUayOw&q=${encoded}&zoom=${zoom}`;
+
   return (
-    <div 
-      className="w-full rounded-lg overflow-hidden shadow-md bg-slate-100 flex items-center justify-center" 
+    <iframe
+      title="Localização da barbearia"
+      className="w-full rounded-lg border-0"
       style={{ height }}
-      aria-label="Mapa mostrando a localização da barbearia"
-    >
-      <div className="text-center p-4">
-        <p className="text-slate-600 mb-2">Mapa temporariamente indisponível</p>
-        <p className="text-sm text-slate-500">{address}</p>
-      </div>
-    </div>
+      loading="lazy"
+      allowFullScreen
+      src={src}
+    />
   );
 }

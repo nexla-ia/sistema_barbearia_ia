@@ -40,11 +40,27 @@ export function AuthModal({ isOpen, onClose, initialView }: AuthModalProps) {
           </div>
         )}
 
+        {/* Abas de navegação */}
+        <div className="flex mb-4 border-b">
+          <button
+            className={`flex-1 py-2 font-medium ${isLoginView ? 'border-b-2 border-amber-500 text-amber-600' : 'text-gray-500'}`}
+            onClick={() => setIsLoginView(true)}
+          >
+            Login
+          </button>
+          <button
+            className={`flex-1 py-2 font-medium ${!isLoginView ? 'border-b-2 border-amber-500 text-amber-600' : 'text-gray-500'}`}
+            onClick={() => setIsLoginView(false)}
+          >
+            Cadastro
+          </button>
+        </div>
+
         {/* Formulário de login ou cadastro */}
         {isLoginView ? (
-          <LoginForm onToggleForm={() => setIsLoginView(false)} />
+          <LoginForm />
         ) : (
-          <RegisterForm onToggleForm={() => setIsLoginView(true)} />
+          <RegisterForm onSuccess={() => setIsLoginView(true)} />
         )}
       </div>
     </div>
