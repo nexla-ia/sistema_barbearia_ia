@@ -128,26 +128,26 @@ export function LoginForm() {
         </button>
         
         <div className="mt-4 pt-4 border-t border-gray-200">
-          <p className="text-center text-sm text-gray-500 mb-2">Acesso rápido para demonstração:</p>
+          <p className="text-center text-sm text-black mb-2">Acesso rápido para demonstração:</p>
           <div className="grid grid-cols-3 gap-2">
             <button
               type="button"
               onClick={() => handleQuickLogin('client')}
-              className="text-xs px-2 py-1 border border-gray-300 rounded hover:bg-gray-50"
+              className="text-xs px-2 py-1 border border-gray-300 rounded hover:bg-gray-50 text-black"
             >
               Cliente
             </button>
             <button
               type="button"
               onClick={() => handleQuickLogin('employee')}
-              className="text-xs px-2 py-1 border border-gray-300 rounded hover:bg-gray-50"
+              className="text-xs px-2 py-1 border border-gray-300 rounded hover:bg-gray-50 text-black"
             >
               Funcionário
             </button>
             <button
               type="button"
               onClick={() => handleQuickLogin('admin')}
-              className="text-xs px-2 py-1 border border-gray-300 rounded hover:bg-gray-50"
+              className="text-xs px-2 py-1 border border-gray-300 rounded hover:bg-gray-50 text-black"
             >
               Admin
             </button>

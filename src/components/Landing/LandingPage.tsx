@@ -141,12 +141,19 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
   const maxIndex = Math.max(0, services.length - visibleSlides);
 
   const nextService = () => {
-    setCurrentServiceIndex((prev) => (prev < maxIndex ? prev + 1 : prev));
+    setCurrentServiceIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
   };
 
   const prevService = () => {
-    setCurrentServiceIndex((prev) => (prev > 0 ? prev - 1 : prev));
+    setCurrentServiceIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentServiceIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [maxIndex]);
 
   return (
     <div className="min-h-screen bg-[#1A1A1A] text-white">
