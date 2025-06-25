@@ -1,10 +1,11 @@
 import React from 'react';
 import { Calendar, Clock, User, Scissors, History, Star } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import LogoutButton from '@/components/Auth/LogoutButton';
 
 export function ClientDashboard() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
 
   return (
@@ -21,41 +22,50 @@ export function ClientDashboard() {
 
       {/* Quick Actions */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white rounded-xl shadow-lg border border-amber-200 p-6 hover:shadow-xl transition-shadow">
+        <button
+          onClick={() => navigate('/client/booking')}
+          className="bg-white rounded-xl shadow-lg border border-[#C4A747] p-6 hover:bg-[#C4A747] hover:text-black transition-colors text-left"
+        >
           <div className="flex items-center space-x-4">
             <div className="bg-amber-100 p-3 rounded-full">
               <Calendar className="w-6 h-6 text-amber-600" />
             </div>
             <div>
-              <h3 className="font-semibold text-slate-900">Agendar</h3>
-              <p className="text-sm text-slate-600">Marque um novo horário</p>
+              <h3 className="font-semibold">Agendar</h3>
+              <p className="text-sm">Marque um novo horário</p>
             </div>
           </div>
-        </div>
+        </button>
 
-        <div className="bg-white rounded-xl shadow-lg border border-amber-200 p-6 hover:shadow-xl transition-shadow">
+        <button
+          onClick={() => navigate('/client/appointments')}
+          className="bg-white rounded-xl shadow-lg border border-[#C4A747] p-6 hover:bg-[#C4A747] hover:text-black transition-colors text-left"
+        >
           <div className="flex items-center space-x-4">
             <div className="bg-blue-100 p-3 rounded-full">
               <Clock className="w-6 h-6 text-blue-600" />
             </div>
             <div>
-              <h3 className="font-semibold text-slate-900">Meus Agendamentos</h3>
-              <p className="text-sm text-slate-600">Visualize ou cancele</p>
+              <h3 className="font-semibold">Meus Agendamentos</h3>
+              <p className="text-sm">Visualize ou cancele</p>
             </div>
           </div>
-        </div>
+        </button>
 
-        <div className="bg-white rounded-xl shadow-lg border border-amber-200 p-6 hover:shadow-xl transition-shadow">
+        <button
+          onClick={() => navigate('/client/profile')}
+          className="bg-white rounded-xl shadow-lg border border-[#C4A747] p-6 hover:bg-[#C4A747] hover:text-black transition-colors text-left"
+        >
           <div className="flex items-center space-x-4">
             <div className="bg-green-100 p-3 rounded-full">
               <User className="w-6 h-6 text-green-600" />
             </div>
             <div>
-              <h3 className="font-semibold text-slate-900">Meu Perfil</h3>
-              <p className="text-sm text-slate-600">Atualize suas informações</p>
+              <h3 className="font-semibold">Meu Perfil</h3>
+              <p className="text-sm">Atualize suas informações</p>
             </div>
           </div>
-        </div>
+        </button>
       </div>
 
       {/* Upcoming Appointments */}
@@ -103,7 +113,12 @@ export function ClientDashboard() {
       <div className="bg-white rounded-xl shadow-lg border border-amber-200 p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-slate-900">Histórico de Serviços</h2>
-          <button className="text-sm text-amber-600 hover:text-amber-700">Ver todos</button>
+          <button
+            onClick={() => navigate('/client/history')}
+            className="text-sm text-[#C4A747] hover:text-[#D4B757]"
+          >
+            Ver todos
+          </button>
         </div>
         
         <div className="space-y-4">
@@ -180,7 +195,12 @@ export function ClientDashboard() {
         </div>
       </div>
       <div className="mt-6 flex justify-end">
-        <LogoutButton />
+        <button
+          onClick={logout}
+          className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+        >
+          Sair
+        </button>
       </div>
     </div>
   );
