@@ -101,6 +101,12 @@ export function ClientProfile({ client, onEdit, onClose }: ClientProfileProps) {
               <Calendar className="w-4 h-4 text-slate-500" />
               <span className="text-slate-900">{formatDate(client.birthDate)}</span>
             </div>
+            {client.anniversaryDate && (
+              <div className="flex items-center space-x-3">
+                <Gift className="w-4 h-4 text-slate-500" />
+                <span className="text-slate-900">{formatDate(client.anniversaryDate)}</span>
+              </div>
+            )}
             {client.address && (
               <div className="flex items-start space-x-3">
                 <MapPin className="w-4 h-4 text-slate-500 mt-0.5" />

@@ -5,6 +5,7 @@ export interface ClientProfile {
   phone: string;
   email: string;
   birthDate: Date;
+  anniversaryDate?: Date;
   
   // Campos opcionais
   address?: {
