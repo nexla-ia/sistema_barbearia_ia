@@ -17,6 +17,7 @@ export function ClientRegistration({ client, onSave, onCancel }: ClientRegistrat
     phone: client?.phone || '',
     email: client?.email || '',
     birthDate: client?.birthDate ? client.birthDate.toISOString().split('T')[0] : '',
+    anniversaryDate: client?.anniversaryDate ? client.anniversaryDate.toISOString().split('T')[0] : '',
     
     // Campos opcionais
     address: {
@@ -114,6 +115,9 @@ export function ClientRegistration({ client, onSave, onCancel }: ClientRegistrat
       phone: formData.phone,
       email: formData.email,
       birthDate: new Date(formData.birthDate),
+      anniversaryDate: formData.anniversaryDate
+        ? new Date(formData.anniversaryDate)
+        : undefined,
       address: formData.address.street ? formData.address : undefined,
       cpf: formData.cpf || undefined,
       photo: formData.photo || undefined,
@@ -281,6 +285,19 @@ export function ClientRegistration({ client, onSave, onCancel }: ClientRegistrat
                   {errors.birthDate}
                 </p>
               )}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">
+                Data de Aniversário
+              </label>
+              <input
+                type="date"
+                value={formData.anniversaryDate}
+                onChange={(e) =>
+                  setFormData(prev => ({ ...prev, anniversaryDate: e.target.value }))
+                }
+                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+              />
             </div>
           </div>
         </div>

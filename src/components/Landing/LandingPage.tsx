@@ -32,6 +32,24 @@ const services = [
     description: 'Hidratação, relaxamento e outros cuidados especiais.',
     price: 'A partir de R$ 40',
   },
+  {
+    icon: Sparkles,
+    title: 'Coloração',
+    description: 'Tintura profissional para realçar seu estilo.',
+    price: 'A partir de R$ 60',
+  },
+  {
+    icon: Sparkles,
+    title: 'Design de Sobrancelhas',
+    description: 'Realce o olhar com um design personalizado.',
+    price: 'A partir de R$ 25',
+  },
+  {
+    icon: Sparkles,
+    title: 'Pacotes Especiais',
+    description: 'Combos promocionais para cuidar do visual completo.',
+    price: 'Consulte valores',
+  },
 ];
 
 export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
@@ -280,10 +298,10 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">SOBRE NÓS</h2>
               <div className="w-24 h-1 bg-[#C4A747] mb-6"></div>
               <p className="text-gray-300 mb-6">
-                Fundada em 2015, a BarberPro nasceu da paixão por transformar a experiência tradicional de barbearia em algo extraordinário. Nossa missão é oferecer serviços de alta qualidade em um ambiente sofisticado e acolhedor.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
               <p className="text-gray-300 mb-6">
-                Contamos com uma equipe de profissionais altamente qualificados, constantemente atualizados com as últimas tendências e técnicas do mercado. Utilizamos produtos premium e equipamentos de ponta para garantir resultados impecáveis.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
               </p>
               <div className="grid grid-cols-2 gap-4 mb-6">
                 {[
@@ -363,18 +381,18 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
                 <div className="flex items-start mb-4">
                   <MapPin className="w-5 h-5 text-[#C4A747] mt-1 flex-shrink-0" />
                   <div className="ml-3">
-                    <p className="font-medium">Av. Paulista, 1000</p>
-                    <p className="text-gray-400">Bela Vista, São Paulo - SP</p>
-                    <p className="text-gray-400">CEP: 01310-100</p>
+                    <p className="font-medium">Rua Exemplo, 123</p>
+                    <p className="text-gray-400">Bairro Central, Cidade - XX</p>
+                    <p className="text-gray-400">CEP: 00000-000</p>
                   </div>
                 </div>
                 <div className="flex items-center mb-4">
                   <Phone className="w-5 h-5 text-[#C4A747] flex-shrink-0" />
-                  <p className="ml-3 font-medium">(11) 99999-9999</p>
+                  <p className="ml-3 font-medium">(00) 00000-0000</p>
                 </div>
                 <div className="flex items-center">
                   <Mail className="w-5 h-5 text-[#C4A747] flex-shrink-0" />
-                  <p className="ml-3 font-medium">contato@barberpro.com.br</p>
+                  <p className="ml-3 font-medium">contato@exemplo.com</p>
                 </div>
               </div>
               <GoogleMap height="256px" />
@@ -398,11 +416,16 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
               Agende seu horário agora e experimente o melhor serviço de barbearia da cidade.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <button 
+              <button
                 onClick={handleBookingClick}
-                className="bg-[#C4A747] text-black px-8 py-4 rounded text-lg font-bold hover:bg-[#D4B757] transition-colors uppercase tracking-wide"
+                className="bg-[#C4A747] text-black px-8 py-4 rounded hover:bg-[#D4B757] transition-colors text-center"
               >
-                Agendar online
+                <span className="block text-lg font-bold uppercase tracking-wide">
+                  Agendar seu horário
+                </span>
+                <span className="block text-xs sm:text-sm italic">
+                  Teste nosso demo e agende online de qualquer dispositivo (mobile e desktop)
+                </span>
               </button>
               <a
                 href="https://wa.me/556999300101"
