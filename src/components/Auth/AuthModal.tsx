@@ -43,13 +43,13 @@ export function AuthModal({ isOpen, onClose, initialView }: AuthModalProps) {
         {/* Abas de navegação */}
         <div className="flex mb-4 border-b">
           <button
-            className={`flex-1 py-2 font-medium ${isLoginView ? 'border-b-2 border-amber-500 text-amber-600' : 'text-gray-500'}`}
+            className={`flex-1 py-2 font-medium ${isLoginView ? 'border-b-2 border-amber-400 text-amber-400' : 'text-gray-300'}`}
             onClick={() => setIsLoginView(true)}
           >
             Login
           </button>
           <button
-            className={`flex-1 py-2 font-medium ${!isLoginView ? 'border-b-2 border-amber-500 text-amber-600' : 'text-gray-500'}`}
+            className={`flex-1 py-2 font-medium ${!isLoginView ? 'border-b-2 border-amber-400 text-amber-400' : 'text-gray-300'}`}
             onClick={() => setIsLoginView(false)}
           >
             Cadastro
