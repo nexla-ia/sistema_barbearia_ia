@@ -66,6 +66,14 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
     setAuthModalOpen(true);
   };
 
+  const sections = [
+    { label: 'início', id: 'home' },
+    { label: 'serviços', id: 'services' },
+    { label: 'sobre', id: 'about' },
+    { label: 'localização', id: 'location' },
+    { label: 'contato', id: 'contact' }
+  ];
+
   return (
     <div className="min-h-screen bg-[#1A1A1A] text-white">
       {/* Header/Navigation */}
@@ -82,13 +90,13 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            {['início', 'serviços', 'sobre', 'localização', 'contato'].map((item) => (
+            {sections.map((section) => (
               <button
-                key={item}
-                onClick={() => scrollToSection(item)}
+                key={section.id}
+                onClick={() => scrollToSection(section.id)}
                 className="text-white hover:text-[#C4A747] transition-colors uppercase tracking-wide text-sm font-medium"
               >
-                {item}
+                {section.label}
               </button>
             ))}
             <button 
@@ -127,13 +135,13 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
           {isMenuOpen && (
             <div className="md:hidden bg-[#1A1A1A] border-t border-[#333333]">
               <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-                {['início', 'serviços', 'sobre', 'localização', 'contato'].map((item) => (
+                {sections.map((section) => (
                 <button
-                  key={item}
-                  onClick={() => scrollToSection(item)}
+                  key={section.id}
+                  onClick={() => scrollToSection(section.id)}
                   className="text-white hover:text-[#C4A747] transition-colors uppercase tracking-wide text-sm font-medium py-2"
                 >
-                  {item}
+                  {section.label}
                 </button>
               ))}
               <button 
