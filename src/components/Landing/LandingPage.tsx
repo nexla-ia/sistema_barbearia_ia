@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Menu, X, MapPin, Phone, Mail, Clock, Scissors, Sparkles } from 'lucide-react';
+import { Menu, X, MapPin, Phone, Mail, Clock, Scissors, Sparkles, User } from 'lucide-react';
 import { AuthModal } from '../Auth/AuthModal';
 import { GoogleMap } from '../Maps/GoogleMap';
 import { useAuth } from '../../contexts/AuthContext';
@@ -13,12 +13,34 @@ const navItems = [
   { label: 'contato', id: 'contact' },
 ];
 
+const services = [
+  {
+    icon: Scissors,
+    title: 'Corte de Cabelo',
+    description: 'Cortes modernos e tradicionais realizados com técnicas exclusivas.',
+    price: 'A partir de R$ 35',
+  },
+  {
+    icon: Scissors,
+    title: 'Barba',
+    description: 'Modelagem completa com toalha quente e produtos premium.',
+    price: 'A partir de R$ 25',
+  },
+  {
+    icon: Sparkles,
+    title: 'Tratamentos',
+    description: 'Hidratação, relaxamento e outros cuidados especiais.',
+    price: 'A partir de R$ 40',
+  },
+];
+
 export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [authModalView, setAuthModalView] = useState<'login' | 'register'>('login');
   const [bookingFormOpen, setBookingFormOpen] = useState(false);
+  const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
   const { isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
 
@@ -33,6 +55,13 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentServiceIndex((prev) => (prev + 1) % services.length);
+    }, 3000);
+    return () => clearInterval(interval);
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -122,19 +151,25 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
             )}
           </nav>
           
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden text-white"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Mobile Actions */}
+          <div className="flex items-center md:hidden space-x-4">
+            <button onClick={handleLoginClick} className="text-white">
+              <User className="w-6 h-6" />
+            </button>
+            <button
+              className="text-white"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
         
         {/* Mobile Navigation */}
-          {isMenuOpen && (
-            <div className="md:hidden bg-[#1A1A1A] border-t border-[#333333]">
-              <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+          <div
+            className={`md:hidden bg-[#1A1A1A] border-t border-[#333333] overflow-hidden transition-all duration-[350ms] ${isMenuOpen ? 'max-h-screen' : 'max-h-0'}`}
+          >
+            <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
                 {navItems.map((item) => (
                 <button
                   key={item.id}
@@ -144,32 +179,14 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
                   {item.label}
                 </button>
               ))}
-              <button 
+              <button
                 onClick={handleBookingClick}
                 className="bg-[#C4A747] text-black px-4 py-3 rounded hover:bg-[#D4B757] transition-colors uppercase tracking-wide text-sm font-bold"
               >
                 Agendar
               </button>
-              {isAuthenticated ? (
-                <button
-                  onClick={() => navigate(user?.role === 'admin' ? '/admin' : user?.role === 'employee' ? '/employee' : '/client')}
-                  className="border border-white text-white px-4 py-3 rounded hover:bg-white hover:text-black transition-colors uppercase tracking-wide text-sm font-bold"
-                >
-                  Minha Conta
-                </button>
-              ) : (
-                <>
-                  <button
-                    onClick={() => openAuthModal('login')}
-                    className="border border-white text-white px-4 py-3 rounded hover:bg-white hover:text-black transition-colors uppercase tracking-wide text-sm font-bold"
-                  >
-                    Login / Cadastro
-                  </button>
-                </>
-              )}
             </div>
           </div>
-        )}
       </header>
 
       {/* Hero Banner */}
@@ -204,28 +221,29 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
             <div className="w-24 h-1 bg-[#C4A747] mx-auto"></div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { 
-                icon: Scissors, 
-                title: 'Corte de Cabelo', 
-                description: 'Cortes modernos e tradicionais realizados com técnicas exclusivas.',
-                price: 'A partir de R$ 35'
-              },
-              { 
-                icon: Scissors, 
-                title: 'Barba', 
-                description: 'Modelagem completa com toalha quente e produtos premium.',
-                price: 'A partir de R$ 25'
-              },
-              { 
-                icon: Sparkles, 
-                title: 'Tratamentos', 
-                description: 'Hidratação, relaxamento e outros cuidados especiais.',
-                price: 'A partir de R$ 40'
-              }
-            ].map((service, index) => (
-              <div 
+          <div className="md:hidden overflow-hidden relative">
+            <div
+              className="flex transition-transform duration-500"
+              style={{ transform: `translateX(-${currentServiceIndex * 100}%)` }}
+            >
+              {services.map((service, index) => (
+                <div key={index} className="min-w-full p-4" onClick={handleBookingClick}>
+                  <div className="bg-[#222222] p-8 rounded-lg transition-transform duration-300 hover:-translate-y-2 border border-[#333333] hover:border-[#C4A747] cursor-pointer group">
+                    <div className="w-16 h-16 bg-[#333333] rounded-full flex items-center justify-center mb-6 mx-auto group-hover:bg-[#C4A747] transition-colors">
+                      <service.icon className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-4 text-center">{service.title}</h3>
+                    <p className="text-gray-400 mb-6 text-center">{service.description}</p>
+                    <p className="text-[#C4A747] font-bold text-center text-xl">{service.price}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="hidden md:grid grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <div
                 key={index}
                 className="bg-[#222222] p-8 rounded-lg transition-transform duration-300 hover:-translate-y-2 border border-[#333333] hover:border-[#C4A747] group"
               >
@@ -276,12 +294,6 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
                   </div>
                 ))}
               </div>
-              <button
-                onClick={handleCTA}
-                className="bg-[#C4A747] text-black px-6 py-3 rounded font-bold hover:bg-[#D4B757] transition-colors uppercase tracking-wide text-sm"
-              >
-                Conheça nossa história
-              </button>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <img 
@@ -315,7 +327,7 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
             {/* Hours */}
             <div>
-              <h2 className="text-3xl font-bold mb-4">HORÁRIOS</h2>
+              <h2 className="text-3xl font-bold mb-4">HORÁRIOS DE FUNCIONAMENTO</h2>
               <div className="w-24 h-1 bg-[#C4A747] mb-6"></div>
               <div className="bg-[#222222] p-6 rounded-lg border border-[#333333]">
                 <table className="w-full">
