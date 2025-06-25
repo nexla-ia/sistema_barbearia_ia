@@ -21,7 +21,7 @@ import { ServiceManagement } from './components/Services/ServiceManagement';
 import { ReportsAnalytics } from './components/Reports/ReportsAnalytics';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { ClientDashboard } from './modules/client/ClientDashboard';
-import { EmployeeDashboard } from './modules/employee/EmployeeDashboard';
+import { EmployeeDashboard } from './components/admin/employee/EmployeeDashboard';
 import { AdminDashboard } from './modules/admin/AdminDashboard';
 import { UnauthorizedPage } from './pages/UnauthorizedPage';
 import { Footer } from './components/Layout/Footer';
