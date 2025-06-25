@@ -5,6 +5,14 @@ import { AuthModal } from '../Auth/AuthModal';
 import { GoogleMap } from '../Maps/GoogleMap';
 import { useAuth } from '../../contexts/AuthContext';
 
+const navItems = [
+  { label: 'início', id: 'home' },
+  { label: 'serviços', id: 'services' },
+  { label: 'sobre', id: 'about' },
+  { label: 'localização', id: 'location' },
+  { label: 'contato', id: 'contact' },
+];
+
 export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -82,13 +90,13 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            {['início', 'serviços', 'sobre', 'localização', 'contato'].map((item) => (
+            {navItems.map((item) => (
               <button
-                key={item}
-                onClick={() => scrollToSection(item)}
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
                 className="text-white hover:text-[#C4A747] transition-colors uppercase tracking-wide text-sm font-medium"
               >
-                {item}
+                {item.label}
               </button>
             ))}
             <button 
@@ -127,13 +135,13 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
           {isMenuOpen && (
             <div className="md:hidden bg-[#1A1A1A] border-t border-[#333333]">
               <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-                {['início', 'serviços', 'sobre', 'localização', 'contato'].map((item) => (
+                {navItems.map((item) => (
                 <button
-                  key={item}
-                  onClick={() => scrollToSection(item)}
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
                   className="text-white hover:text-[#C4A747] transition-colors uppercase tracking-wide text-sm font-medium py-2"
                 >
-                  {item}
+                  {item.label}
                 </button>
               ))}
               <button 
