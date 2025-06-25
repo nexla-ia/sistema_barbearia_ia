@@ -1,6 +1,7 @@
 import React from 'react';
 import { DollarSign, Calendar, Users, TrendingUp, BarChart3, Scissors, User } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import LogoutButton from '@/components/Auth/LogoutButton';
 
 export function AdminDashboard() {
   const { user } = useAuth();
@@ -14,6 +15,9 @@ export function AdminDashboard() {
 
   return (
     <div className="space-y-6">
+      <div className="flex justify-end">
+        <LogoutButton />
+      </div>
       {/* Welcome Section */}
       <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
         <h1 className="text-2xl font-bold text-slate-900 mb-2">

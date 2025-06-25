@@ -1,30 +1,18 @@
 import React from 'react';
-import { Calendar, Clock, User, Scissors, History, Star, LogOut } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Calendar, Clock, User, Scissors, History, Star } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import LogoutButton from '@/components/Auth/LogoutButton';
 
 export function ClientDashboard() {
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    logout();
-    navigate('/');
-  };
+  const { user } = useAuth();
 
   return (
     <div className="space-y-6">
       <div className="flex justify-end">
-        <button
-          onClick={handleLogout}
-          className="flex items-center gap-2 text-sm text-red-600 hover:text-red-700"
-        >
-          <LogOut className="w-4 h-4" />
-          Sair
-        </button>
+        <LogoutButton />
       </div>
       {/* Welcome Section */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+      <div className="bg-white rounded-xl shadow-lg border border-amber-200 p-6">
         <h1 className="text-2xl font-bold text-slate-900 mb-2">
           Bem-vindo, {user?.name}!
         </h1>
@@ -35,7 +23,7 @@ export function ClientDashboard() {
 
       {/* Quick Actions */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow">
+        <div className="bg-white rounded-xl shadow-lg border border-amber-200 p-6 hover:shadow-lg transition-shadow">
           <div className="flex items-center space-x-4">
             <div className="bg-amber-100 p-3 rounded-full">
               <Calendar className="w-6 h-6 text-amber-600" />
@@ -47,7 +35,7 @@ export function ClientDashboard() {
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow">
+        <div className="bg-white rounded-xl shadow-lg border border-amber-200 p-6 hover:shadow-lg transition-shadow">
           <div className="flex items-center space-x-4">
             <div className="bg-blue-100 p-3 rounded-full">
               <Clock className="w-6 h-6 text-blue-600" />
@@ -59,7 +47,7 @@ export function ClientDashboard() {
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow">
+        <div className="bg-white rounded-xl shadow-lg border border-amber-200 p-6 hover:shadow-lg transition-shadow">
           <div className="flex items-center space-x-4">
             <div className="bg-green-100 p-3 rounded-full">
               <User className="w-6 h-6 text-green-600" />
@@ -73,7 +61,7 @@ export function ClientDashboard() {
       </div>
 
       {/* Upcoming Appointments */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+      <div className="bg-white rounded-xl shadow-lg border border-amber-200 p-6">
         <h2 className="text-lg font-semibold text-slate-900 mb-4">Próximos Agendamentos</h2>
         
         <div className="space-y-4">
@@ -114,7 +102,7 @@ export function ClientDashboard() {
       </div>
 
       {/* Service History */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+      <div className="bg-white rounded-xl shadow-lg border border-amber-200 p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-slate-900">Histórico de Serviços</h2>
           <button className="text-sm text-amber-600 hover:text-amber-700">Ver todos</button>
@@ -156,7 +144,7 @@ export function ClientDashboard() {
       </div>
 
       {/* Loyalty Program */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+      <div className="bg-white rounded-xl shadow-lg border border-amber-200 p-6">
         <h2 className="text-lg font-semibold text-slate-900 mb-4">Programa de Fidelidade</h2>
         
         <div className="bg-gradient-to-r from-amber-50 to-amber-100 rounded-lg p-6 border border-amber-200">

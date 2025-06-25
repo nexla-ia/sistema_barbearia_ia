@@ -35,6 +35,26 @@ export function LoginForm() {
     }
   };
 
+  const handleQuickLogin = async (role: 'client' | 'employee' | 'admin') => {
+    const creds = {
+      client: { email: 'client@example.com', password: 'password' },
+      employee: { email: 'employee@example.com', password: 'password' },
+      admin: { email: 'admin@example.com', password: 'password' },
+    }[role];
+
+    setEmail(creds.email);
+    setPassword(creds.password);
+
+    try {
+      await login(creds.email, creds.password);
+      const redirect =
+        role === 'admin' ? '/admin' : role === 'employee' ? '/employee' : '/client';
+      navigate(redirect);
+    } catch (err) {
+      setFormError((err as Error).message);
+    }
+  };
+
   return (
     <div className="w-full max-w-md">
       <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
@@ -59,7 +79,7 @@ export function LoginForm() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-white text-black"
               placeholder="seu@email.com"
             />
           </div>
@@ -77,7 +97,7 @@ export function LoginForm() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-white text-black"
               placeholder="••••••••"
             />
           </div>
@@ -111,30 +131,21 @@ export function LoginForm() {
           <div className="grid grid-cols-3 gap-2">
             <button
               type="button"
-              onClick={() => {
-                setEmail('client@example.com');
-                setPassword('password');
-              }}
+              onClick={() => handleQuickLogin('client')}
               className="text-xs px-2 py-1 border border-gray-300 rounded hover:bg-gray-50"
             >
               Cliente
             </button>
             <button
               type="button"
-              onClick={() => {
-                setEmail('employee@example.com');
-                setPassword('password');
-              }}
+              onClick={() => handleQuickLogin('employee')}
               className="text-xs px-2 py-1 border border-gray-300 rounded hover:bg-gray-50"
             >
               Funcionário
             </button>
             <button
               type="button"
-              onClick={() => {
-                setEmail('admin@example.com');
-                setPassword('password');
-              }}
+              onClick={() => handleQuickLogin('admin')}
               className="text-xs px-2 py-1 border border-gray-300 rounded hover:bg-gray-50"
             >
               Admin

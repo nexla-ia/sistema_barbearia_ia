@@ -61,7 +61,7 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-white text-black"
               placeholder="Seu nome"
             />
           </div>
@@ -79,7 +79,7 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-white text-black"
               placeholder="seu@email.com"
             />
           </div>
@@ -97,7 +97,7 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-white text-black"
               placeholder="••••••••"
             />
           </div>
@@ -115,7 +115,7 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-white text-black"
               placeholder="••••••••"
             />
           </div>
