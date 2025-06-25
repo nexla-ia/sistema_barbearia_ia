@@ -113,7 +113,11 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
       >
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center">
-              <Scissors className="w-8 h-8 text-[#C4A747]" />
+              <img
+                src="/images/icon_trimmed_transparent_customcolor (1).png"
+                alt="Barbernex logo"
+                className="w-8 h-8"
+              />
               <span className="ml-2 text-2xl font-bold tracking-wider">BARBER<span className="text-[#C4A747]">NEX</span></span>
           </div>
           
