@@ -69,7 +69,7 @@ export function LoginForm() {
       
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-white mb-1">
             E-mail
           </label>
           <div className="relative">
@@ -87,7 +87,7 @@ export function LoginForm() {
         </div>
         
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-white mb-1">
             Senha
           </label>
           <div className="relative">
@@ -112,7 +112,7 @@ export function LoginForm() {
               onChange={(e) => setRememberMe(e.target.checked)}
               className="h-4 w-4 text-amber-500 focus:ring-amber-500 border-gray-300 rounded"
             />
-            <span className="ml-2 text-sm text-gray-600">Lembrar-me</span>
+            <span className="ml-2 text-sm text-white">Lembrar-me</span>
           </label>
           <a href="#" className="text-sm text-amber-600 hover:text-amber-500">
             Esqueceu a senha?
