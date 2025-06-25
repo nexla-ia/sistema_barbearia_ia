@@ -460,10 +460,10 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
         ></div>
         <div className="container mx-auto px-4 relative z-20">
           <div className="text-center max-w-2xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">PRONTO PARA TRANSFORMAR SEU VISUAL?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Que tal transformar sua barbearia com um sistema de IA de última geração?</h2>
             <div className="w-24 h-1 bg-[#C4A747] mx-auto mb-6"></div>
             <p className="text-xl text-gray-300 mb-8">
-              Agende um demonstrativo agora e experimente o melhor serviço de barbearia da cidade.
+              Agende um demonstrativo agora e experimente o melhor serviço de barbearia com integração com IA.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <button
