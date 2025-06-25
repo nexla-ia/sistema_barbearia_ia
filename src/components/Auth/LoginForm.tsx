@@ -35,6 +35,27 @@ export function LoginForm() {
     }
   };
 
+  const handleQuickLogin = async (role: 'client' | 'employee' | 'admin') => {
+    const credentials = {
+      client: 'client@example.com',
+      employee: 'employee@example.com',
+      admin: 'admin@example.com',
+    } as const;
+
+    const email = credentials[role];
+    const password = 'password';
+
+    setEmail(email);
+    setPassword(password);
+
+    try {
+      await login(email, password);
+      navigate(role === 'admin' ? '/admin' : role === 'employee' ? '/employee' : '/client');
+    } catch (err) {
+      setFormError((err as Error).message);
+    }
+  };
+
   return (
     <div className="w-full max-w-md">
       <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
@@ -59,7 +80,7 @@ export function LoginForm() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
               placeholder="seu@email.com"
             />
           </div>
@@ -77,7 +98,7 @@ export function LoginForm() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
               placeholder="••••••••"
             />
           </div>
@@ -111,30 +132,21 @@ export function LoginForm() {
           <div className="grid grid-cols-3 gap-2">
             <button
               type="button"
-              onClick={() => {
-                setEmail('client@example.com');
-                setPassword('password');
-              }}
+              onClick={() => handleQuickLogin('client')}
               className="text-xs px-2 py-1 border border-gray-300 rounded hover:bg-gray-50"
             >
               Cliente
             </button>
             <button
               type="button"
-              onClick={() => {
-                setEmail('employee@example.com');
-                setPassword('password');
-              }}
+              onClick={() => handleQuickLogin('employee')}
               className="text-xs px-2 py-1 border border-gray-300 rounded hover:bg-gray-50"
             >
               Funcionário
             </button>
             <button
               type="button"
-              onClick={() => {
-                setEmail('admin@example.com');
-                setPassword('password');
-              }}
+              onClick={() => handleQuickLogin('admin')}
               className="text-xs px-2 py-1 border border-gray-300 rounded hover:bg-gray-50"
             >
               Admin

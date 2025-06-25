@@ -1,5 +1,5 @@
 import React from 'react';
-import { 
+import {
   Home, 
   Globe,
   Calendar, 
@@ -12,6 +12,7 @@ import {
   Menu,
   X
 } from 'lucide-react';
+import LogoutButton from '../Auth/LogoutButton';
 
 interface SidebarProps {
   activeTab: string;
@@ -99,7 +100,7 @@ export function Sidebar({ activeTab, onTabChange, isOpen, onToggle }: SidebarPro
 
         {/* Footer */}
         <div className="absolute bottom-0 left-0 right-0 p-4">
-          <div className="bg-slate-800 rounded-lg p-4">
+          <div className="bg-slate-800 rounded-lg p-4 space-y-4">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center">
                 <span className="text-white font-semibold">A</span>
@@ -108,6 +109,9 @@ export function Sidebar({ activeTab, onTabChange, isOpen, onToggle }: SidebarPro
                 <p className="text-white font-medium">Admin</p>
                 <p className="text-slate-400 text-sm">Proprietário</p>
               </div>
+            </div>
+            <div className="flex justify-end">
+              <LogoutButton />
             </div>
           </div>
         </div>
