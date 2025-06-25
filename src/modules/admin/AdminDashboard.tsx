@@ -1,9 +1,12 @@
 import React from 'react';
 import { DollarSign, Calendar, Users, TrendingUp, BarChart3, Scissors, User } from 'lucide-react';
+import LogoutButton from '../../components/Auth/LogoutButton';
 import { useAuth } from '../../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export function AdminDashboard() {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('pt-BR', {
@@ -230,6 +233,9 @@ export function AdminDashboard() {
             </tbody>
           </table>
         </div>
+      </div>
+      <div className="mt-6 flex justify-end">
+        <LogoutButton variant="outline" onLogout={() => navigate('/')} />
       </div>
     </div>
   );

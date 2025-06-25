@@ -12,8 +12,8 @@ export function LoginForm() {
   const { login, error, isLoading } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     setFormError('');
     
     if (!email || !password) {
@@ -59,7 +59,7 @@ export function LoginForm() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-white text-gray-900"
               placeholder="seu@email.com"
             />
           </div>
@@ -77,7 +77,7 @@ export function LoginForm() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-white text-gray-900"
               placeholder="••••••••"
             />
           </div>
@@ -111,9 +111,11 @@ export function LoginForm() {
           <div className="grid grid-cols-3 gap-2">
             <button
               type="button"
-              onClick={() => {
+              onClick={async () => {
                 setEmail('client@example.com');
                 setPassword('password');
+                await login('client@example.com', 'password');
+                navigate('/client');
               }}
               className="text-xs px-2 py-1 border border-gray-300 rounded hover:bg-gray-50"
             >
@@ -121,9 +123,11 @@ export function LoginForm() {
             </button>
             <button
               type="button"
-              onClick={() => {
+              onClick={async () => {
                 setEmail('employee@example.com');
                 setPassword('password');
+                await login('employee@example.com', 'password');
+                navigate('/employee');
               }}
               className="text-xs px-2 py-1 border border-gray-300 rounded hover:bg-gray-50"
             >
@@ -131,9 +135,11 @@ export function LoginForm() {
             </button>
             <button
               type="button"
-              onClick={() => {
+              onClick={async () => {
                 setEmail('admin@example.com');
                 setPassword('password');
+                await login('admin@example.com', 'password');
+                navigate('/admin');
               }}
               className="text-xs px-2 py-1 border border-gray-300 rounded hover:bg-gray-50"
             >

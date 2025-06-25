@@ -1,7 +1,8 @@
 import React from 'react';
-import { Calendar, Clock, User, Scissors, History, Star, LogOut } from 'lucide-react';
+import { Calendar, Clock, User, Scissors, History, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import LogoutButton from '../../components/Auth/LogoutButton';
 
 export function ClientDashboard() {
   const { user, logout } = useAuth();
@@ -14,15 +15,7 @@ export function ClientDashboard() {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-end">
-        <button
-          onClick={handleLogout}
-          className="flex items-center gap-2 text-sm text-red-600 hover:text-red-700"
-        >
-          <LogOut className="w-4 h-4" />
-          Sair
-        </button>
-      </div>
+      
       {/* Welcome Section */}
       <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
         <h1 className="text-2xl font-bold text-slate-900 mb-2">
@@ -178,9 +171,9 @@ export function ClientDashboard() {
             Faltam 350 pontos para o próximo nível (Prata)
           </p>
           
-          <div className="bg-white rounded-lg p-4">
-            <h4 className="font-medium text-slate-900 mb-2">Benefícios Disponíveis</h4>
-            <ul className="space-y-2 text-sm">
+      <div className="bg-white rounded-lg p-4">
+        <h4 className="font-medium text-slate-900 mb-2">Benefícios Disponíveis</h4>
+        <ul className="space-y-2 text-sm">
               <li className="flex items-center">
                 <div className="w-2 h-2 bg-amber-500 rounded-full mr-2"></div>
                 <span>5% de desconto em todos os serviços</span>
@@ -192,6 +185,9 @@ export function ClientDashboard() {
             </ul>
           </div>
         </div>
+      </div>
+      <div className="mt-6 flex justify-end">
+        <LogoutButton variant="outline" onLogout={handleLogout} />
       </div>
     </div>
   );

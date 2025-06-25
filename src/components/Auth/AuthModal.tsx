@@ -36,7 +36,7 @@ export function AuthModal({ isOpen, onClose, initialView }: AuthModalProps) {
         {/* Botão de logout, aparece apenas se o usuário estiver logado */}
         {user && (
           <div className="absolute top-4 left-4">
-            <LogoutButton />
+            <LogoutButton variant="outline" />
           </div>
         )}
 

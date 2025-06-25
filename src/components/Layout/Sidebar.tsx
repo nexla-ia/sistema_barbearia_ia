@@ -12,6 +12,7 @@ import {
   Menu,
   X
 } from 'lucide-react';
+import LogoutButton from '../Auth/LogoutButton';
 
 interface SidebarProps {
   activeTab: string;
@@ -108,6 +109,9 @@ export function Sidebar({ activeTab, onTabChange, isOpen, onToggle }: SidebarPro
                 <p className="text-white font-medium">Admin</p>
                 <p className="text-slate-400 text-sm">Proprietário</p>
               </div>
+            </div>
+            <div className="mt-4 text-center">
+              <LogoutButton variant="solid" />
             </div>
           </div>
         </div>
