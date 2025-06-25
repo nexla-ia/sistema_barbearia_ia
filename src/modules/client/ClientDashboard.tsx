@@ -1,12 +1,28 @@
 import React from 'react';
-import { Calendar, Clock, User, Scissors, History, Star } from 'lucide-react';
+import { Calendar, Clock, User, Scissors, History, Star, LogOut } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
 export function ClientDashboard() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   return (
     <div className="space-y-6">
+      <div className="flex justify-end">
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-2 text-sm text-red-600 hover:text-red-700"
+        >
+          <LogOut className="w-4 h-4" />
+          Sair
+        </button>
+      </div>
       {/* Welcome Section */}
       <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
         <h1 className="text-2xl font-bold text-slate-900 mb-2">

@@ -8,7 +8,8 @@ import { useAuth } from '../../contexts/AuthContext';
 export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authModalView, setAuthModalView] = useState<'login' | 'register'>('login');
   const [bookingFormOpen, setBookingFormOpen] = useState(false);
   const { isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
@@ -49,8 +50,14 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
         navigate('/client');
       }
     } else {
-      setShowLoginModal(true);
+      setAuthModalView('login');
+      setAuthModalOpen(true);
     }
+  };
+
+  const handleRegisterClick = () => {
+    setAuthModalView('register');
+    setAuthModalOpen(true);
   };
 
   return (
@@ -84,12 +91,29 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
             >
               Agendar
             </button>
-            <button 
-              onClick={handleLoginClick}
-              className="border border-white text-white px-4 py-2 rounded hover:bg-white hover:text-black transition-colors uppercase tracking-wide text-sm font-bold"
-            >
-              {isAuthenticated ? 'Minha Conta' : 'Login'}
-            </button>
+            {isAuthenticated ? (
+              <button
+                onClick={() => navigate(user?.role === 'admin' ? '/admin' : user?.role === 'employee' ? '/employee' : '/client')}
+                className="border border-white text-white px-4 py-2 rounded hover:bg-white hover:text-black transition-colors uppercase tracking-wide text-sm font-bold"
+              >
+                Minha Conta
+              </button>
+            ) : (
+              <>
+                <button
+                  onClick={handleLoginClick}
+                  className="border border-white text-white px-4 py-2 rounded hover:bg-white hover:text-black transition-colors uppercase tracking-wide text-sm font-bold"
+                >
+                  Login
+                </button>
+                <button
+                  onClick={handleRegisterClick}
+                  className="border border-white text-white px-4 py-2 rounded hover:bg-white hover:text-black transition-colors uppercase tracking-wide text-sm font-bold"
+                >
+                  Cadastro
+                </button>
+              </>
+            )}
           </nav>
           
           {/* Mobile Menu Button */}
@@ -120,12 +144,29 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
               >
                 Agendar
               </button>
-              <button 
-                onClick={() => isAuthenticated ? navigate(user?.role === 'admin' ? '/admin' : user?.role === 'employee' ? '/employee' : '/client') : setShowLoginModal(true)}
-                className="border border-white text-white px-4 py-3 rounded hover:bg-white hover:text-black transition-colors uppercase tracking-wide text-sm font-bold"
-              >
-                {isAuthenticated ? 'Minha Conta' : 'Login'}
-              </button>
+              {isAuthenticated ? (
+                <button
+                  onClick={() => navigate(user?.role === 'admin' ? '/admin' : user?.role === 'employee' ? '/employee' : '/client')}
+                  className="border border-white text-white px-4 py-3 rounded hover:bg-white hover:text-black transition-colors uppercase tracking-wide text-sm font-bold"
+                >
+                  Minha Conta
+                </button>
+              ) : (
+                <>
+                  <button
+                    onClick={handleLoginClick}
+                    className="border border-white text-white px-4 py-3 rounded hover:bg-white hover:text-black transition-colors uppercase tracking-wide text-sm font-bold"
+                  >
+                    Login
+                  </button>
+                  <button
+                    onClick={handleRegisterClick}
+                    className="border border-white text-white px-4 py-3 rounded hover:bg-white hover:text-black transition-colors uppercase tracking-wide text-sm font-bold"
+                  >
+                    Cadastro
+                  </button>
+                </>
+              )}
             </div>
           </div>
         )}
@@ -528,7 +569,11 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
       )}
 
       {/* Login/Register Modal */}
-      <AuthModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} />
+      <AuthModal
+        isOpen={authModalOpen}
+        onClose={() => setAuthModalOpen(false)}
+        initialView={authModalView}
+      />
     </div>
   );
 }

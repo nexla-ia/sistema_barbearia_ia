@@ -1,6 +1,6 @@
 // src/components/Auth/AuthModal.tsx
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { LoginForm } from './LoginForm';
 import { RegisterForm } from './RegisterForm';
@@ -10,10 +10,14 @@ import { useAuth } from '@/contexts/AuthContext';
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
+  initialView?: 'login' | 'register';
 }
 
-export function AuthModal({ isOpen, onClose }: AuthModalProps) {
-  const [isLoginView, setIsLoginView] = useState(true);
+export function AuthModal({ isOpen, onClose, initialView }: AuthModalProps) {
+  const [isLoginView, setIsLoginView] = useState(initialView !== 'register');
+  useEffect(() => {
+    setIsLoginView(initialView !== 'register');
+  }, [initialView]);
   const { user } = useAuth();
 
   if (!isOpen) return null;
