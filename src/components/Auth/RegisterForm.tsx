@@ -50,7 +50,7 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
       
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-white mb-1">
             Nome completo
           </label>
           <div className="relative">
@@ -68,7 +68,7 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
         </div>
         
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-white mb-1">
             E-mail
           </label>
           <div className="relative">
@@ -86,7 +86,7 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
         </div>
         
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-white mb-1">
             Senha
           </label>
           <div className="relative">
@@ -104,7 +104,7 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
         </div>
         
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-white mb-1">
             Confirmar senha
           </label>
           <div className="relative">
