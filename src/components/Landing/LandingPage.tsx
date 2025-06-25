@@ -76,6 +76,10 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
   const { isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
 
+  const visibleSlides = isMobile ? 1 : 3;
+  const slideWidth = 100 / visibleSlides;
+  const maxIndex = Math.max(0, services.length - visibleSlides);
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -96,6 +100,15 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentServiceIndex((prev) =>
+        prev >= maxIndex ? 0 : prev + 1
+      );
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [maxIndex]);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -136,9 +149,6 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
     setAuthModalOpen(true);
   };
 
-  const visibleSlides = isMobile ? 1 : 3;
-  const slideWidth = 100 / visibleSlides;
-  const maxIndex = Math.max(0, services.length - visibleSlides);
 
   const nextService = () => {
     setCurrentServiceIndex((prev) => (prev < maxIndex ? prev + 1 : prev));
