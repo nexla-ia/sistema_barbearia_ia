@@ -21,8 +21,6 @@ import { ServiceManagement } from './components/Services/ServiceManagement';
 import { ReportsAnalytics } from './components/Reports/ReportsAnalytics';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { ClientDashboard } from './modules/client/ClientDashboard';
-import { ClientAppointments } from './modules/client/ClientAppointments';
-import { ClientProfilePage } from './modules/client/ClientProfilePage';
 import { ClientHistoryPage } from './modules/client/ClientHistoryPage';
 import { EmployeeDashboard } from './components/admin/employee/EmployeeDashboard';
 import { AdminDashboard } from './modules/admin/AdminDashboard';
@@ -137,16 +135,6 @@ function App() {
                     <Route path="/client" element={
                       <ProtectedRoute requiredRole="client">
                         <ClientDashboard />
-                      </ProtectedRoute>
-                    } />
-                    <Route path="/client/appointments" element={
-                      <ProtectedRoute requiredRole="client">
-                        <ClientAppointments />
-                      </ProtectedRoute>
-                    } />
-                    <Route path="/client/profile" element={
-                      <ProtectedRoute requiredRole="client">
-                        <ClientProfilePage />
                       </ProtectedRoute>
                     } />
                     <Route path="/client/history" element={

@@ -3,11 +3,15 @@ import { Calendar, Clock, User, Scissors, History, Star, LogOut } from 'lucide-r
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { BookingModal } from './BookingModal';
+import { AppointmentsModal } from './AppointmentsModal';
+import { ProfileModal } from './ProfileModal';
 
 export function ClientDashboard() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [showBooking, setShowBooking] = useState(false);
+  const [showAppointments, setShowAppointments] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#1A1A1A] text-white space-y-6 p-6">
@@ -35,7 +39,7 @@ export function ClientDashboard() {
         </button>
 
         <button
-          onClick={() => navigate('/client/appointments')}
+          onClick={() => setShowAppointments(true)}
           className="bg-[#222222] rounded-xl shadow-lg border border-[#C4A747] p-6 hover:bg-[#C4A747] hover:text-black transition-colors text-left"
         >
           <div className="flex items-center space-x-4">
@@ -50,7 +54,7 @@ export function ClientDashboard() {
         </button>
 
         <button
-          onClick={() => navigate('/client/profile')}
+          onClick={() => setShowProfile(true)}
           className="bg-[#222222] rounded-xl shadow-lg border border-[#C4A747] p-6 hover:bg-[#C4A747] hover:text-black transition-colors text-left"
         >
           <div className="flex items-center space-x-4">
@@ -199,6 +203,8 @@ export function ClientDashboard() {
         </button>
       </div>
       <BookingModal isOpen={showBooking} onClose={() => setShowBooking(false)} />
+      <AppointmentsModal isOpen={showAppointments} onClose={() => setShowAppointments(false)} />
+      <ProfileModal isOpen={showProfile} onClose={() => setShowProfile(false)} />
     </div>
   );
 }
