@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Menu, X, MapPin, Phone, Mail, Instagram, Facebook, Twitter, Clock, Scissors, Sparkles } from 'lucide-react';
+import { Menu, X, MapPin, Phone, Mail, Clock, Scissors, Sparkles } from 'lucide-react';
 import { AuthModal } from '../Auth/AuthModal';
 import { GoogleMap } from '../Maps/GoogleMap';
 import { useAuth } from '../../contexts/AuthContext';
@@ -76,13 +76,13 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
       >
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center">
-            <Scissors className="w-8 h-8 text-[#C4A747]" />
-            <span className="ml-2 text-2xl font-bold tracking-wider">BARBER<span className="text-[#C4A747]">PRO</span></span>
+              <Scissors className="w-8 h-8 text-[#C4A747]" />
+              <span className="ml-2 text-2xl font-bold tracking-wider">BARBER<span className="text-[#C4A747]">NEX</span></span>
           </div>
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            {['home', 'services', 'about', 'location', 'contact'].map((item) => (
+            {['início', 'serviços', 'sobre', 'localização', 'contato'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
@@ -124,10 +124,10 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
         </div>
         
         {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-[#1A1A1A] border-t border-[#333333]">
-            <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-              {['home', 'services', 'about', 'location', 'contact'].map((item) => (
+          {isMenuOpen && (
+            <div className="md:hidden bg-[#1A1A1A] border-t border-[#333333]">
+              <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+                {['início', 'serviços', 'sobre', 'localização', 'contato'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
@@ -176,9 +176,9 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
             ESTILO & PRECISÃO
           </h1>
           <div className="w-24 h-1 bg-[#C4A747] mx-auto mb-6"></div>
-          <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
-            Transforme seu visual com os melhores profissionais da cidade
-          </p>
+            <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
+              Transforme seu visual com os melhores profissionais da cidade. Modelo de demonstração Nexla
+            </p>
           <button 
             onClick={handleBookingClick}
             className="bg-[#C4A747] text-black px-8 py-4 rounded text-lg font-bold hover:bg-[#D4B757] transition-colors uppercase tracking-wide"
@@ -353,7 +353,7 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
                   <p className="ml-3 font-medium">contato@barberpro.com.br</p>
                 </div>
               </div>
-              <GoogleMap address="Av. Paulista, 1000, São Paulo - SP" height="256px" />
+              <GoogleMap height="256px" />
             </div>
           </div>
         </div>
@@ -393,83 +393,6 @@ export function LandingPage({ onAdminLogin }: { onAdminLogin?: () => void }) {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-black py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center mb-4">
-                <Scissors className="w-6 h-6 text-[#C4A747]" />
-                <span className="ml-2 text-xl font-bold tracking-wider">BARBER<span className="text-[#C4A747]">PRO</span></span>
-              </div>
-              <p className="text-gray-400 mb-4">
-                Transformando estilos e elevando a experiência de barbearia desde 2015.
-              </p>
-              <div className="flex space-x-4">
-                <a href="#" className="w-10 h-10 bg-[#333333] rounded-full flex items-center justify-center hover:bg-[#C4A747] transition-colors">
-                  <Instagram className="w-5 h-5" />
-                </a>
-                <a href="#" className="w-10 h-10 bg-[#333333] rounded-full flex items-center justify-center hover:bg-[#C4A747] transition-colors">
-                  <Facebook className="w-5 h-5" />
-                </a>
-                <a href="#" className="w-10 h-10 bg-[#333333] rounded-full flex items-center justify-center hover:bg-[#C4A747] transition-colors">
-                  <Twitter className="w-5 h-5" />
-                </a>
-              </div>
-            </div>
-            
-            <div>
-              <h3 className="text-lg font-bold mb-4 uppercase">Serviços</h3>
-              <ul className="space-y-2">
-                {['Corte de Cabelo', 'Barba', 'Sobrancelha', 'Tratamentos', 'Coloração', 'Combos'].map((item, index) => (
-                  <li key={index}>
-                    <a href="#" className="text-gray-400 hover:text-[#C4A747] transition-colors">{item}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="text-lg font-bold mb-4 uppercase">Links Úteis</h3>
-              <ul className="space-y-2">
-                {['Início', 'Sobre Nós', 'Serviços', 'Galeria', 'Equipe', 'Contato'].map((item, index) => (
-                  <li key={index}>
-                    <a href="#" className="text-gray-400 hover:text-[#C4A747] transition-colors">{item}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="text-lg font-bold mb-4 uppercase">Contato</h3>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <MapPin className="w-5 h-5 text-[#C4A747] mt-1 flex-shrink-0" />
-                  <span className="ml-3 text-gray-400">Av. Paulista, 1000, Bela Vista, São Paulo - SP</span>
-                </li>
-                <li className="flex items-center">
-                  <Phone className="w-5 h-5 text-[#C4A747] flex-shrink-0" />
-                  <span className="ml-3 text-gray-400">(11) 99999-9999</span>
-                </li>
-                <li className="flex items-center">
-                  <Mail className="w-5 h-5 text-[#C4A747] flex-shrink-0" />
-                  <span className="ml-3 text-gray-400">contato@barberpro.com.br</span>
-                </li>
-                <li className="flex items-center">
-                  <Clock className="w-5 h-5 text-[#C4A747] flex-shrink-0" />
-                  <span className="ml-3 text-gray-400">Seg-Sex: 9h às 20h | Sáb: 9h às 18h</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-[#333333] mt-12 pt-8 text-center">
-            <p className="text-gray-500">
-              &copy; {new Date().getFullYear()} BarberPro. Todos os direitos reservados.
-            </p>
-          </div>
-        </div>
-      </footer>
 
       {/* Booking Form Modal */}
       {bookingFormOpen && (

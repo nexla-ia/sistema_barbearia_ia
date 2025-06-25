@@ -8,7 +8,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center mb-4">
-              <span className="text-xl font-bold tracking-wider text-white">BARBER<span className="text-[#C4A747]">PRO</span></span>
+              <span className="text-xl font-bold tracking-wider text-white">BARBER<span className="text-[#C4A747]">NEX</span></span>
             </div>
             <p className="text-gray-400 mb-4">
               Transformando estilos e elevando a experiência de barbearia desde 2015.
@@ -69,7 +69,7 @@ export function Footer() {
         
         <div className="border-t border-[#333333] mt-8 pt-6 text-center">
           <p className="text-gray-500">
-            &copy; {new Date().getFullYear()} BarberPro. Todos os direitos reservados.
+            &copy; 2025 BarberPro. Todos os direitos reservados.
           </p>
           <p className="text-gray-600 mt-2 text-sm">
             Desenvolvido por NEXLA
