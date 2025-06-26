@@ -16,13 +16,17 @@ export function ClientDashboard() {
   return (
     <div
       className="min-h-screen bg-cover bg-center"
-      style={{ backgroundImage: "url('https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')" }}
+      style={{
+        backgroundImage:
+          "url('https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')",
+      }}
     >
-      <div className="min-h-screen bg-black/50 backdrop-blur text-white space-y-6 p-6 lg:p-12 max-w-5xl mx-auto">
+      <div className="min-h-screen bg-black/50 backdrop-blur text-white">
+        <div className="space-y-6 p-6 lg:p-12 max-w-5xl mx-auto">
       {/* Welcome Section */}
       <div className="bg-white rounded-xl shadow-lg border border-amber-500 p-6">
         <h1 className="text-2xl font-bold mb-2">Bem-vindo, {user?.name}!</h1>
-        <p className="text-gray-300">Gerencie seus agendamentos e acompanhe seu histórico de serviços.</p>
+        <p className="text-gray-700">Gerencie seus agendamentos e acompanhe seu histórico de serviços.</p>
       </div>
 
       {/* Quick Actions */}
