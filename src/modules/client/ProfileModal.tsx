@@ -46,11 +46,11 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 transition-opacity">
-      <div className="bg-white rounded-lg p-6 max-w-md w-full text-gray-800 space-y-4">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 transition-opacity">
+      <div className="bg-[#303030] rounded-lg p-6 max-w-md w-full text-white space-y-4">
         <div className="flex justify-between items-center">
           <h3 className="text-xl font-bold">Meu Perfil</h3>
-          <button onClick={onClose} className="text-gray-500 hover:text-black">
+          <button onClick={onClose} className="text-gray-400 hover:text-white">
             <X className="w-6 h-6" />
           </button>
         </div>
@@ -103,14 +103,14 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
         <div className="flex justify-end gap-2 pt-2">
           {isEditing ? (
             <>
-              <button onClick={() => setIsEditing(false)} className="px-4 py-2 rounded bg-gray-200 text-gray-700">Cancelar</button>
+              <button onClick={() => setIsEditing(false)} className="px-4 py-2 rounded bg-gray-600 text-white">Cancelar</button>
               <button onClick={handleSave} className="px-4 py-2 rounded bg-amber-500 text-black">Salvar</button>
             </>
           ) : (
             <button onClick={() => setIsEditing(true)} className="px-4 py-2 rounded bg-amber-500 text-black">Editar</button>
           )}
         </div>
-        <p className="text-sm text-gray-600">Endereço: {address}</p>
+        <p className="text-sm text-gray-300">Endereço: {address}</p>
       </div>
     </div>
   );
