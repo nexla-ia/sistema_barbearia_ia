@@ -10,7 +10,8 @@ export function ClientHistoryPage() {
   const client = state.clients.find(c => c.fullName === user?.name);
 
   return (
-    <div className="min-h-screen bg-[#1A1A1A] text-white p-6 space-y-6">
+    <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')" }}>
+      <div className="min-h-screen bg-black/50 backdrop-blur text-white p-6 space-y-6">
       <h1 className="text-2xl font-bold mb-4">Histórico de Serviços</h1>
       {client && client.serviceHistory.length > 0 ? (
         <div className="space-y-4">
@@ -32,6 +33,7 @@ export function ClientHistoryPage() {
       ) : (
         <p>Nenhum serviço encontrado.</p>
       )}
+      </div>
     </div>
   );
 }
