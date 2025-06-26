@@ -47,10 +47,14 @@ export function ClientProfilePage() {
   return (
     <div
       className="min-h-screen bg-cover bg-center"
-      style={{ backgroundImage: "url('https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')" }}
+      style={{
+        backgroundImage:
+          "url('https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')",
+      }}
     >
-      <div className="min-h-screen bg-black/50 backdrop-blur text-white p-6 space-y-6 max-w-3xl mx-auto">
-        <h1 className="text-2xl font-bold mb-4">Meu Perfil</h1>
+      <div className="min-h-screen bg-black/50 backdrop-blur text-white">
+        <div className="p-6 space-y-6 max-w-3xl mx-auto">
+          <h1 className="text-2xl font-bold mb-4">Meu Perfil</h1>
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium">Nome Completo</label>
@@ -118,6 +122,7 @@ export function ClientProfilePage() {
         </div>
         <div className="flex justify-end pt-4">
           <button onClick={handleSave} className="px-4 py-2 rounded bg-amber-500 text-black">Salvar</button>
+        </div>
         </div>
       </div>
     </div>
