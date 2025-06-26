@@ -9,7 +9,8 @@ export function ClientProfilePage() {
   const client = state.clients.find(c => c.fullName === user?.name);
 
   return (
-    <div className="min-h-screen bg-[#1A1A1A] text-white p-6 space-y-6">
+    <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1527631120902-cb4e2b33f410?auto=format&fit=crop&w=1350&q=80')" }}>
+      <div className="min-h-screen bg-white/80 backdrop-blur text-gray-800 p-6 space-y-6 max-w-5xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">Meu Perfil</h1>
       {client ? (
         <div className="space-y-4">
@@ -33,6 +34,7 @@ export function ClientProfilePage() {
       ) : (
         <p>Dados do cliente não encontrados.</p>
       )}
+      </div>
     </div>
   );
 }

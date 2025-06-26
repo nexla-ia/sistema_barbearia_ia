@@ -14,9 +14,13 @@ export function ClientDashboard() {
   const [showProfile, setShowProfile] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#1A1A1A] text-white space-y-6 p-6">
+    <div
+      className="min-h-screen bg-cover bg-center"
+      style={{ backgroundImage: "url('https://images.unsplash.com/photo-1527631120902-cb4e2b33f410?auto=format&fit=crop&w=1350&q=80')" }}
+    >
+      <div className="min-h-screen bg-white/80 backdrop-blur text-gray-800 space-y-6 p-6 lg:p-12 max-w-5xl mx-auto">
       {/* Welcome Section */}
-      <div className="bg-[#222222] rounded-xl shadow-lg border border-amber-500 p-6">
+      <div className="bg-white rounded-xl shadow-lg border border-amber-500 p-6">
         <h1 className="text-2xl font-bold mb-2">Bem-vindo, {user?.name}!</h1>
         <p className="text-gray-300">Gerencie seus agendamentos e acompanhe seu histórico de serviços.</p>
       </div>
@@ -25,7 +29,7 @@ export function ClientDashboard() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <button
           onClick={() => setShowBooking(true)}
-          className="bg-[#222222] rounded-xl shadow-lg border border-[#C4A747] p-6 hover:bg-[#C4A747] hover:text-black transition-colors text-left"
+          className="bg-white rounded-xl shadow-lg border border-[#C4A747] p-6 hover:bg-[#C4A747] hover:text-black transition-colors text-left"
         >
           <div className="flex items-center space-x-4">
             <div className="bg-amber-100 p-3 rounded-full">
@@ -40,7 +44,7 @@ export function ClientDashboard() {
 
         <button
           onClick={() => setShowAppointments(true)}
-          className="bg-[#222222] rounded-xl shadow-lg border border-[#C4A747] p-6 hover:bg-[#C4A747] hover:text-black transition-colors text-left"
+          className="bg-white rounded-xl shadow-lg border border-[#C4A747] p-6 hover:bg-[#C4A747] hover:text-black transition-colors text-left"
         >
           <div className="flex items-center space-x-4">
             <div className="bg-blue-100 p-3 rounded-full">
@@ -55,7 +59,7 @@ export function ClientDashboard() {
 
         <button
           onClick={() => setShowProfile(true)}
-          className="bg-[#222222] rounded-xl shadow-lg border border-[#C4A747] p-6 hover:bg-[#C4A747] hover:text-black transition-colors text-left"
+          className="bg-white rounded-xl shadow-lg border border-[#C4A747] p-6 hover:bg-[#C4A747] hover:text-black transition-colors text-left"
         >
           <div className="flex items-center space-x-4">
             <div className="bg-green-100 p-3 rounded-full">
@@ -70,11 +74,11 @@ export function ClientDashboard() {
       </div>
 
       {/* Upcoming Appointments */}
-      <div className="bg-[#222222] rounded-xl shadow-lg border border-amber-500 p-6">
+      <div className="bg-white rounded-xl shadow-lg border border-amber-500 p-6">
         <h2 className="text-lg font-semibold mb-4">Próximos Agendamentos</h2>
         
         <div className="space-y-4">
-          <div className="flex items-center justify-between p-4 bg-[#1f1f1f] rounded-lg">
+          <div className="flex items-center justify-between p-4 bg-gray-100 rounded-lg">
             <div className="flex items-center space-x-4">
               <div className="bg-amber-100 p-3 rounded-full">
                 <Scissors className="w-5 h-5 text-amber-600" />
@@ -91,7 +95,7 @@ export function ClientDashboard() {
             </div>
           </div>
           
-          <div className="flex items-center justify-between p-4 bg-[#1f1f1f] rounded-lg">
+          <div className="flex items-center justify-between p-4 bg-gray-100 rounded-lg">
             <div className="flex items-center space-x-4">
               <div className="bg-amber-100 p-3 rounded-full">
                 <Scissors className="w-5 h-5 text-amber-600" />
@@ -111,7 +115,7 @@ export function ClientDashboard() {
       </div>
 
       {/* Service History */}
-      <div className="bg-[#222222] rounded-xl shadow-lg border border-amber-500 p-6">
+      <div className="bg-white rounded-xl shadow-lg border border-amber-500 p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold">Histórico de Serviços</h2>
           <button
@@ -123,7 +127,7 @@ export function ClientDashboard() {
         </div>
         
         <div className="space-y-4">
-          <div className="flex items-center justify-between p-4 bg-[#1f1f1f] rounded-lg">
+          <div className="flex items-center justify-between p-4 bg-gray-100 rounded-lg">
             <div className="flex items-center space-x-4">
               <div className="bg-slate-200 p-3 rounded-full">
                 <History className="w-5 h-5 text-slate-600" />
@@ -139,7 +143,7 @@ export function ClientDashboard() {
             </div>
           </div>
           
-          <div className="flex items-center justify-between p-4 bg-[#1f1f1f] rounded-lg">
+          <div className="flex items-center justify-between p-4 bg-gray-100 rounded-lg">
             <div className="flex items-center space-x-4">
               <div className="bg-slate-200 p-3 rounded-full">
                 <History className="w-5 h-5 text-slate-600" />
@@ -158,7 +162,7 @@ export function ClientDashboard() {
       </div>
 
       {/* Loyalty Program */}
-      <div className="bg-[#222222] rounded-xl shadow-lg border border-amber-500 p-6">
+      <div className="bg-white rounded-xl shadow-lg border border-amber-500 p-6">
         <h2 className="text-lg font-semibold mb-4">Programa de Fidelidade</h2>
         
       <div className="bg-gradient-to-r from-amber-700 to-amber-500 rounded-lg p-6 border border-amber-600 text-black">
@@ -178,7 +182,7 @@ export function ClientDashboard() {
           
           <p className="text-sm mb-4">Faltam 350 pontos para o próximo nível (Prata)</p>
           
-          <div className="bg-[#222222] rounded-lg p-4 text-white">
+          <div className="bg-gray-100 rounded-lg p-4 text-gray-800">
             <h4 className="font-medium mb-2">Benefícios Disponíveis</h4>
             <ul className="space-y-2 text-sm">
               <li className="flex items-center">
@@ -211,6 +215,7 @@ export function ClientDashboard() {
         isOpen={showProfile}
         onClose={() => setShowProfile(false)}
       />
+    </div>
     </div>
   );
 }

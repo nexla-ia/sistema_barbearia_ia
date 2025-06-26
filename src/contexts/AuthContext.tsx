@@ -10,6 +10,7 @@ export interface User {
   email: string;
   role: UserRole;
   avatar?: string;
+  password?: string;
 }
 
 // Auth context interface
@@ -20,6 +21,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   register: (name: string, email: string, password: string, role?: UserRole) => Promise<void>;
+  updateUser: (data: Partial<User>) => void;
   isAuthenticated: boolean;
   hasPermission: (requiredRole: UserRole) => boolean;
 }
@@ -104,6 +106,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.removeItem('user');
   };
 
+  const updateUser = (data: Partial<User>) => {
+    setUser(prev => {
+      if (!prev) return prev;
+      const updated = { ...prev, ...data };
+      localStorage.setItem('user', JSON.stringify(updated));
+      return updated;
+    });
+  };
+
   // Register function
   const register = async (name: string, email: string, password: string, role: UserRole = 'client') => {
     setIsLoading(true);
@@ -149,6 +160,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         login,
         logout,
         register,
+        updateUser,
         isAuthenticated: !!user,
         hasPermission,
       }}
