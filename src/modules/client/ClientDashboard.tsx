@@ -4,14 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { BookingModal } from './BookingModal';
 import { AppointmentsModal } from './AppointmentsModal';
-import { ProfileModal } from './ProfileModal';
 
 export function ClientDashboard() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [showBooking, setShowBooking] = useState(false);
   const [showAppointments, setShowAppointments] = useState(false);
-  const [showProfile, setShowProfile] = useState(false);
 
   return (
     <div
@@ -58,7 +56,7 @@ export function ClientDashboard() {
         </button>
 
         <button
-          onClick={() => setShowProfile(true)}
+          onClick={() => navigate('/client/profile')}
           className="bg-white rounded-xl shadow-lg border border-[#C4A747] p-6 hover:bg-[#C4A747] hover:text-black transition-colors text-left"
         >
           <div className="flex items-center space-x-4">
@@ -210,10 +208,6 @@ export function ClientDashboard() {
       <AppointmentsModal
         isOpen={showAppointments}
         onClose={() => setShowAppointments(false)}
-      />
-      <ProfileModal
-        isOpen={showProfile}
-        onClose={() => setShowProfile(false)}
       />
     </div>
     </div>
