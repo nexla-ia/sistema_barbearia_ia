@@ -9,8 +9,8 @@ export function ClientAppointments() {
   const appointments = state.appointments.filter(a => a.clientName === user?.name);
 
   return (
-    <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1527631120902-cb4e2b33f410?auto=format&fit=crop&w=1350&q=80')" }}>
-      <div className="min-h-screen bg-white/80 backdrop-blur text-gray-800 p-6 space-y-6 max-w-5xl mx-auto">
+    <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')" }}>
+      <div className="min-h-screen bg-black/50 backdrop-blur text-white p-6 space-y-6 max-w-5xl mx-auto">
       <h1 className="text-2xl font-bold">Meus Agendamentos</h1>
       <div className="overflow-x-auto">
         <table className="min-w-full text-sm">
