@@ -47,6 +47,38 @@ export function AppointmentsModal({ isOpen, onClose }: AppointmentsModalProps) {
       barber: 'Marcos Paulo',
       status: 'cancelado',
     },
+    {
+      id: 'samp5',
+      date: '30/07/2024',
+      time: '11:00',
+      service: 'Tratamento Capilar',
+      barber: 'Rafael Costa',
+      status: 'confirmado',
+    },
+    {
+      id: 'samp6',
+      date: '05/08/2024',
+      time: '15:00',
+      service: 'Hidratação',
+      barber: 'Lucas Rocha',
+      status: 'pendente',
+    },
+    {
+      id: 'samp7',
+      date: '10/08/2024',
+      time: '13:30',
+      service: 'Coloração',
+      barber: 'Fernando Lima',
+      status: 'confirmado',
+    },
+    {
+      id: 'samp8',
+      date: '15/08/2024',
+      time: '17:00',
+      service: 'Alisamento',
+      barber: 'Bruno Ferreira',
+      status: 'cancelado',
+    },
   ];
 
   const appointments = state.appointments.filter(a => a.clientName === user?.name);

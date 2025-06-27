@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Calendar, Clock, User, Star, ArrowRight, Check } from 'lucide-react';
 import { useScheduling } from '../../contexts/SchedulingContext';
+import { useAuth } from '../../contexts/AuthContext';
 import { format, addDays, startOfWeek } from 'date-fns';
 import { Service, Barber } from '../../types/scheduling';
 
@@ -12,15 +13,16 @@ interface BookingStep {
 
 export function ClientBooking() {
   const { state, getAvailableSlots, bookAppointment } = useScheduling();
+  const { user } = useAuth();
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedServices, setSelectedServices] = useState<Service[]>([]);
   const [selectedBarber, setSelectedBarber] = useState<Barber | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [clientInfo, setClientInfo] = useState({
-    name: '',
-    email: '',
-    phone: '',
+    name: user?.name || 'Cliente Exemplo',
+    email: user?.email || 'cliente@exemplo.com',
+    phone: '11999999999',
     notes: '',
   });
   const [isBooking, setIsBooking] = useState(false);
@@ -30,8 +32,7 @@ export function ClientBooking() {
     { step: 1, title: 'Serviços', completed: selectedServices.length > 0 },
     { step: 2, title: 'Profissional', completed: selectedBarber !== null },
     { step: 3, title: 'Data e Hora', completed: selectedDate && selectedTime !== '' },
-    { step: 4, title: 'Dados Pessoais', completed: clientInfo.name && clientInfo.email && clientInfo.phone },
-    { step: 5, title: 'Confirmação', completed: false },
+    { step: 4, title: 'Confirmação', completed: true },
   ];
 
   const totalDuration = selectedServices.reduce((sum, service) => sum + service.duration, 0);
@@ -280,7 +281,7 @@ export function ClientBooking() {
                 </div>
               )}
 
-              {/* Step 3: Date and Time */}
+              {/* Step 3: Data e Hora */}
               {currentStep === 3 && (
                 <div>
                   <h2 className="text-xl font-semibold text-slate-900 mb-6">Escolha data e horário</h2>
@@ -342,68 +343,23 @@ export function ClientBooking() {
                       </p>
                     )}
                   </div>
-                </div>
-              )}
-
-              {/* Step 4: Client Information */}
-              {currentStep === 4 && (
-                <div>
-                  <h2 className="text-xl font-semibold text-slate-900 mb-6">Seus dados</h2>
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Nome completo *
-                      </label>
-                      <input
-                        type="text"
-                        value={clientInfo.name}
-                        onChange={(e) => setClientInfo(prev => ({ ...prev, name: e.target.value }))}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
-                        placeholder="Digite seu nome completo"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Email *
-                      </label>
-                      <input
-                        type="email"
-                        value={clientInfo.email}
-                        onChange={(e) => setClientInfo(prev => ({ ...prev, email: e.target.value }))}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
-                        placeholder="seu@email.com"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Telefone *
-                      </label>
-                      <input
-                        type="tel"
-                        value={clientInfo.phone}
-                        onChange={(e) => setClientInfo(prev => ({ ...prev, phone: e.target.value }))}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
-                        placeholder="(11) 99999-9999"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">
-                        Observações (opcional)
-                      </label>
-                      <textarea
-                        value={clientInfo.notes}
-                        onChange={(e) => setClientInfo(prev => ({ ...prev, notes: e.target.value }))}
-                        rows={3}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
-                        placeholder="Alguma preferência ou observação especial?"
-                      />
-                    </div>
+                  <div className="mt-6">
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                      Observações (opcional)
+                    </label>
+                    <textarea
+                      value={clientInfo.notes}
+                      onChange={(e) => setClientInfo(prev => ({ ...prev, notes: e.target.value }))}
+                      rows={3}
+                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                      placeholder="Alguma preferência ou observação especial?"
+                    />
                   </div>
                 </div>
               )}
 
-              {/* Step 5: Confirmation */}
-              {currentStep === 5 && (
+              {/* Step 4: Confirmation */}
+              {currentStep === 4 && (
                 <div>
                   <h2 className="text-xl font-semibold text-slate-900 mb-6">Confirmar agendamento</h2>
                   <div className="space-y-6">
@@ -458,8 +414,8 @@ export function ClientBooking() {
                   Voltar
                 </button>
                 <button
-                  onClick={() => setCurrentStep(prev => Math.min(5, prev + 1))}
-                  disabled={!steps[currentStep - 1].completed || currentStep === 5}
+                  onClick={() => setCurrentStep(prev => Math.min(4, prev + 1))}
+                  disabled={!steps[currentStep - 1].completed || currentStep === 4}
                   className="px-6 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Próximo
