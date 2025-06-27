@@ -38,6 +38,20 @@ export function HistoryModal({ isOpen, onClose }: HistoryModalProps) {
       professional: 'Carlos Alberto',
       rating: '5.0',
     },
+    {
+      id: 'h5',
+      service: 'Selagem',
+      date: '22/04/2024',
+      professional: 'Rafael Costa',
+      rating: '4.9',
+    },
+    {
+      id: 'h6',
+      service: 'Luzes',
+      date: '02/04/2024',
+      professional: 'Fernando Lima',
+      rating: '4.8',
+    },
   ];
 
   return (
