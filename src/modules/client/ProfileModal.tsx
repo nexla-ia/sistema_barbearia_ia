@@ -46,7 +46,7 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 transition-opacity">
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 transition-opacity">
       <div className="bg-[#303030] rounded-lg p-6 max-w-md w-full text-white space-y-4">
         <div className="flex justify-between items-center">
           <h3 className="text-xl font-bold">Meu Perfil</h3>
@@ -62,7 +62,7 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
                 type="text"
                 value={formData.fullName}
                 onChange={e => setFormData({ ...formData, fullName: e.target.value })}
-                className="w-full mt-1 px-3 py-2 border rounded"
+                className="w-full mt-1 px-3 py-2 rounded bg-[#333333] border border-[#444444] text-white"
               />
             </div>
             <div>
@@ -71,7 +71,7 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
                 type="tel"
                 value={formData.phone}
                 onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full mt-1 px-3 py-2 border rounded"
+                className="w-full mt-1 px-3 py-2 rounded bg-[#333333] border border-[#444444] text-white"
               />
             </div>
             <div>
@@ -80,7 +80,7 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
                 type="email"
                 value={formData.email}
                 onChange={e => setFormData({ ...formData, email: e.target.value })}
-                className="w-full mt-1 px-3 py-2 border rounded"
+                className="w-full mt-1 px-3 py-2 rounded bg-[#333333] border border-[#444444] text-white"
               />
             </div>
             <div>
@@ -89,7 +89,7 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
                 type="password"
                 value={formData.password}
                 onChange={e => setFormData({ ...formData, password: e.target.value })}
-                className="w-full mt-1 px-3 py-2 border rounded"
+                className="w-full mt-1 px-3 py-2 rounded bg-[#333333] border border-[#444444] text-white"
               />
             </div>
           </div>

@@ -24,10 +24,24 @@ export function HistoryModal({ isOpen, onClose }: HistoryModalProps) {
       professional: 'Pedro Santos',
       rating: '4.8',
     },
+    {
+      id: 'h3',
+      service: 'Barba',
+      date: '28/05/2024',
+      professional: 'Marcos Paulo',
+      rating: '4.7',
+    },
+    {
+      id: 'h4',
+      service: 'Tratamento Capilar',
+      date: '10/05/2024',
+      professional: 'Carlos Alberto',
+      rating: '5.0',
+    },
   ];
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className="bg-[#303030] rounded-lg p-6 max-w-md w-full border border-[#444444] text-white">
         <div className="flex justify-between items-center mb-6">
           <h3 className="text-xl font-bold">Histórico de Serviços</h3>
