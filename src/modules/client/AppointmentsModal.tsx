@@ -31,6 +31,22 @@ export function AppointmentsModal({ isOpen, onClose }: AppointmentsModalProps) {
       barber: 'Pedro Santos',
       status: 'pendente',
     },
+    {
+      id: 'samp3',
+      date: '20/07/2024',
+      time: '16:00',
+      service: 'Corte + Barba',
+      barber: 'Carlos Alberto',
+      status: 'confirmado',
+    },
+    {
+      id: 'samp4',
+      date: '25/07/2024',
+      time: '09:30',
+      service: 'Pezinho',
+      barber: 'Marcos Paulo',
+      status: 'cancelado',
+    },
   ];
 
   const appointments = state.appointments.filter(a => a.clientName === user?.name);
@@ -45,7 +61,7 @@ export function AppointmentsModal({ isOpen, onClose }: AppointmentsModalProps) {
   })) : sampleAppointments;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center z-50 p-4 transition-opacity">
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 transition-opacity">
       <div className="bg-[#303030] rounded-lg p-6 max-w-md w-full border border-[#444444] text-white">
         <div className="flex justify-between items-center mb-6">
           <h3 className="text-xl font-bold">Meus Agendamentos</h3>

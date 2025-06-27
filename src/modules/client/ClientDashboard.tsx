@@ -126,7 +126,7 @@ export function ClientDashboard() {
             onClick={() => setShowHistory(true)}
             className="text-sm text-[#C4A747] hover:text-[#D4B757]"
           >
-            Ver todos
+            Ver Mais
           </button>
         </div>
         

@@ -10,7 +10,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center z-50 p-4 transition-opacity">
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 transition-opacity">
       <div className="bg-[#303030] rounded-lg p-6 max-w-md w-full border border-[#444444] text-white">
         <div className="flex justify-between items-center mb-6">
           <h3 className="text-xl font-bold">Agendar Horário</h3>
@@ -19,30 +19,6 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
           </button>
         </div>
         <form className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">Nome completo</label>
-            <input
-              type="text"
-              className="w-full px-4 py-2 bg-[#333333] border border-[#444444] rounded focus:outline-none focus:ring-2 focus:ring-[#C4A747] text-white"
-              placeholder="Seu nome"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">Telefone</label>
-            <input
-              type="tel"
-              className="w-full px-4 py-2 bg-[#333333] border border-[#444444] rounded focus:outline-none focus:ring-2 focus:ring-[#C4A747] text-white"
-              placeholder="(00) 00000-0000"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">E-mail</label>
-            <input
-              type="email"
-              className="w-full px-4 py-2 bg-[#333333] border border-[#444444] rounded focus:outline-none focus:ring-2 focus:ring-[#C4A747] text-white"
-              placeholder="seu@email.com"
-            />
-          </div>
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-1">Serviço</label>
             <select className="w-full px-4 py-2 bg-[#333333] border border-[#444444] rounded focus:outline-none focus:ring-2 focus:ring-[#C4A747] text-white">
